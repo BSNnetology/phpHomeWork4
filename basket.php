@@ -102,7 +102,7 @@ function checkNumericCount(mixed $currentCount): bool {
     if (!is_int($currentCount)) {
         echo <<<HEREDOC
         Количество товара введено некорректно. Повторите операцию.
-        Нажмите enter для продолжения \n
+        Нажмите enter для продолжения 
         HEREDOC; 
 
         fgets(STDIN);  
@@ -119,9 +119,9 @@ function checkExistName(string $currentName, array $curretntItems): bool {
     if (!array_key_exists($currentName, $curretntItems)) {
         echo <<<HEREDOC
         Указанный товар отсутствует в списке. Введите другую операцию.
-        Нажмите enter для продолжения \n
-
+        Нажмите enter для продолжения 
         HEREDOC;
+
         fgets(STDIN);
         return false;
     }
@@ -154,7 +154,8 @@ function addIntoShoppingList(): void {
         return;
     }
 
-    echo "Введение количество товара (0 в список добавлено не будет): \n> ";
+    echo "Введение количество товара\n";
+    echo "(0 в список добавлено не будет):\n> ";
     fscanf(STDIN, "%d\n", $itemNCount);
 
     if (!checkNumericCount($itemNCount) || $itemNCount == 0) {
@@ -169,7 +170,7 @@ function addIntoShoppingList(): void {
 function deleteFromShoppingList(): void {
     global $items; 
 
-    echo 'Введение название товара для удаления из списка:' . PHP_EOL . '> ';
+    echo "Введение название товара для удаления из списка:\n> ";
     $itemName = trim(fgets(STDIN));
 
     // Проверить, есть ли товары в списке? Если нет, то сказать об этом и попросить ввести другую операцию
@@ -185,7 +186,7 @@ function deleteFromShoppingList(): void {
 function renameListItem(): void {
     global $items; 
 
-    echo 'Введение название товара для изменения:' . PHP_EOL . '> ';
+    echo "Введение название товара для изменения:\n> ";
     $itemName = trim(fgets(STDIN));
 
     // Проверить, есть ли товары в списке? Если нет, то сказать об этом и попросить ввести другую операцию
@@ -193,14 +194,16 @@ function renameListItem(): void {
         return;
     }
 
-    echo 'Введение новое название товара (enter - оставить прежнее: ' . $itemName . ')):' . PHP_EOL . '> ';
+    echo "Введение новое название товара\n";
+    echo "(enter - оставить прежнее: $itemName)):\n> ";
     $newName = trim(fgets(STDIN));
     $isRewrite = $itemName !== $newName && $newName !== "";
 
-    echo 'Введение новое количество товара 
-(enter - оставить прежнее: ' . $items[$itemName] . ')
-(0 - товар будет удален):' . PHP_EOL . '> ';
+    echo "Введение новое количество товара\n";
+    echo "(enter - оставить прежнее: $items[$itemName]\n";
+    echo"(0 - товар будет удален):\n> ";
     $newCount = trim(fgets(STDIN));
+    
     
     if ($newCount === "") {
         $newCount = $items[$itemName]; 
