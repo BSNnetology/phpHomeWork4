@@ -90,7 +90,8 @@ function getOperationNumber(array $workOperations): string {
     if (!array_key_exists($operationNumber, $workOperations)) {
         system('clear');
         echo '!!! Неизвестный номер операции, повторите попытку.' . PHP_EOL;
-        getOperationNumber($workOperations);
+        echo 'Нажмите enter для продолжения ';
+        fgets(STDIN);
     }
 
     return $operationNumber;
