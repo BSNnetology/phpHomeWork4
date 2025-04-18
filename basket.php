@@ -157,9 +157,9 @@ function addIntoShoppingList(): void {
     echo "Введение количество товара (0 в список добавлено не будет): \n> ";
     fscanf(STDIN, "%d\n", $itemNCount);
 
-    if (!checkNumericCount($itemNCount)) {
-        return;
-    }
+    if (!checkNumericCount($itemNCount) || $itemNCount == 0) {
+      return;
+    } 
 
     $items[$itemName] = $itemNCount;
 }
@@ -197,7 +197,9 @@ function renameListItem(): void {
     $newName = trim(fgets(STDIN));
     $isRewrite = $itemName !== $newName && $newName !== "";
 
-    echo 'Введение новое количество товара (enter - оставить прежнее: ' . $items[$itemName] . ')):' . PHP_EOL . '> ';
+    echo 'Введение новое количество товара 
+(enter - оставить прежнее: ' . $items[$itemName] . ')
+(0 - товар будет удален):' . PHP_EOL . '> ';
     $newCount = trim(fgets(STDIN));
     
     if ($newCount === "") {
@@ -213,9 +215,15 @@ function renameListItem(): void {
         $newName = $itemName;
     } 
 
+    $isRewrite = $isRewrite || ($newCount === 0);
+
     if ($isRewrite) {
         unset($items[$itemName]);
     } 
+
+    if ($newCount === 0) {
+        return;
+    }
 
     $items[$newName] = $newCount;
 }
