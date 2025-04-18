@@ -4,7 +4,7 @@ const OPERATION_EXIT = 0;
 const OPERATION_PRINT = 1;
 const OPERATION_ADD = 2;
 const OPERATION_DELETE = 3;
-const OPERATION_RENAME = 4;
+const OPERATION_CHANGE = 4;
 //-----------------------------
 
 $operations = [
@@ -12,7 +12,7 @@ $operations = [
     OPERATION_PRINT => OPERATION_PRINT . '. Отобразить список покупок.',
     OPERATION_ADD => OPERATION_ADD . '. Добавить товар в список покупок.',
     OPERATION_DELETE => OPERATION_DELETE . '. Удалить товар из списка покупок.',
-    OPERATION_RENAME => OPERATION_RENAME . '. Изменить товар в списке покупок.',
+    OPERATION_CHANGE => OPERATION_CHANGE . '. Изменить товар в списке покупок.',
 ];
 //-----------------------------
 
@@ -41,8 +41,8 @@ do {
             deleteFromShoppingList();
             break;
 
-        case OPERATION_RENAME:
-            renameListItem();
+        case OPERATION_CHANGE:
+            changeListItem();
             break;
     }
 
@@ -183,7 +183,7 @@ function deleteFromShoppingList(): void {
 
 //-----------------------------
 // 4. Изменить товар в списке покупок
-function renameListItem(): void {
+function changeListItem(): void {
     global $items; 
 
     echo "Введение название товара для изменения:\n> ";
